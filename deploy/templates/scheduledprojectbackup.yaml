@@ -1,0 +1,11 @@
+apiVersion: apphosting.mittwald.cloud/v1
+kind: ScheduledProjectBackup
+metadata:
+  name: paperless-backup
+spec:
+  schedule: 30 4 * * *
+  template:
+    spec:
+      project:
+        name: paperless
+      ttl: 30d

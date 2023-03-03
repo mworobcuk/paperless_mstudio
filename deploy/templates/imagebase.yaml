@@ -1,0 +1,40 @@
+apiVersion: apphosting.mittwald.cloud/v1
+kind: ImageBase
+metadata:
+  name: paperless-release-0
+spec:
+  environment:
+    PAPERLESS_ADMIN_USER: {{ default "admin" .Values.admin.user }}
+    PAPERLESS_ADMIN_PASSWORD: "{{ .Values.admin.pass }}"
+    PAPERLESS_ADMIN_MAIL: "{{ .Values.admin.mail }}"
+    #PAPERLESS_DBENGINE: {{ default "mariadb" .Values.db.engine }}
+    #PAPERLESS_DBHOST: "{{ .Values.db.host }}"
+    #PAPERLESS_DBNAME: "{{ .Values.db.name }}"
+    #PAPERLESS_DBPORT: {{ default "3306" .Values.db.port | quote }}
+    #PAPERLESS_DBUSER: "{{ .Values.db.user }}"
+    #PAPERLESS_DBPASS: "{{ .Values.db.pass }}"
+    PAPERLESS_REDIS: "redis://{{ .Values.redis.host }}:{{ .Values.redis.port }}"
+    PAPERLESS_URL: "https://{{ .Values.host }}"
+    USERMAP_UID: {{ default "1000" .Values.user.uid | quote }}
+    USERMAP_GID: {{ default "1000" .Values.user.gid | quote }}
+  command: ["/sbin/docker-entrypoint.sh", "/usr/local/bin/paperless_cmd.sh"]
+  exposedPorts:
+    http:
+      portNumber: {{ default "8000" .Values.port }}
+      protocol: TCP
+  source:
+    image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+    imageAuth:
+      {{- toYaml .Values.imageAuth | nindent 6 }}
+  volumeAssignments:
+    Consume:
+      mountPath: /usr/src/paperless/consume
+    Data:
+      mountPath: /usr/src/paperless/data
+    Export:
+      mountPath: /usr/src/paperless/export
+    Media:
+      mountPath: /usr/src/paperless/media
+    Volatile:
+      mountPath: /tmp
+  writableRootFS: true

@@ -1,0 +1,11 @@
+apiVersion: dbhosting.mittwald.cloud/v1
+kind: RedisDB
+metadata:
+  name: paperless
+spec:
+  configuration:
+    maxMemory: "0"
+  project:
+    name: paperless
+  redisSet:
+    name: default-60

@@ -1,0 +1,27 @@
+apiVersion: apphosting.mittwald.cloud/v1
+kind: Project
+metadata:
+  name: {{ .Release.Name }}
+spec:
+  backupTarget:
+    secret:
+      key: password
+      name: paperless-backup
+    volume:
+      name: paperless-backups
+  localization:
+    timezone: Europe/Berlin
+  placement: {}
+  platform:
+    components: []
+    imageBase:
+      name: paperless-release-0
+      namespace: {{ .Release.Namespace }}
+    ssh:
+      type: Sidecar
+    webserver:
+      name: none
+  resources:
+    {{- toYaml .Values.resources | nindent 4 }}
+  security: {}
+  storageClass: ceph
