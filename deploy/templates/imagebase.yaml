@@ -15,6 +15,17 @@ spec:
     #PAPERLESS_DBPASS: "{{ .Values.db.pass }}"
     PAPERLESS_REDIS: "redis://{{ .Values.redis.host }}:{{ .Values.redis.port }}"
     PAPERLESS_URL: "https://{{ .Values.host }}"
+    PAPERLESS_TIME_ZONE: "{{ .Values.timezone }}"
+    PAPERLESS_OCR_LANGUAGES: "{{ .Values.ocr.languages }}"
+    PAPERLESS_OCR_LANGUAGE: "{{ .Values.ocr.language }}"
+    PAPERLESS_SECRET_KEY: "{{ .Values.secretKey }}"
+    PAPERLESS_TASK_WORKERS: "{{ .Values.taskWorkers }}"
+    PAPERLESS_THREADS_PER_WORKER: "{{ .Values.threadsPerWorker }}"
+    PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD:  "{{ .Values.ocr.rotatePagesThreshold }}"
+    PAPERLESS_TRASH_DIR:  "{{ .Values.trashDir }}"
+    PAPERLESS_CONSUMER_DELETE_DUPLICATES:  "{{ .Values.consumerDeleteDuplicates }}"
+    PAPERLESS_FORCE_SCRIPT_NAME: "https://{{ .Values.forceScriptName }}"
+    PAPERLESS_POST_CONSUME_SCRIPT: "{{ .Values.postConsumeScript }}"
     USERMAP_UID: {{ default "1000" .Values.user.uid | quote }}
     USERMAP_GID: {{ default "1000" .Values.user.gid | quote }}
   command: ["/sbin/docker-entrypoint.sh", "/usr/local/bin/paperless_cmd.sh"]

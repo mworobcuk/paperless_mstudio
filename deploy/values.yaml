@@ -20,6 +20,15 @@ imageAuth: {}
 nameOverride: ""
 fullnameOverride: ""
 
+ssh:
+  users: []
+  # - name: info@chart-example.local
+  #   passwords: []
+  #   - id: password
+  #     value:
+  #   publicKeys: {}
+  #   - id: "0"
+  #     value: ssh-rsa AAAA...
 
 admin:
   # user: "admin"
@@ -44,6 +53,20 @@ port: ""
 user: {}
   # uid: "1000"
   # gid: "1000"
+
+timezone: ""
+secretKey: ""
+taskWorkers: ""
+threadsPerWorker: ""
+rotatePagesThreshold: ""
+trashDir: ""
+consumerDeleteDuplicates: ""
+forceScriptName: ""
+postConsumeScript: ""
+
+ocr:
+  languages: ""
+  language: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
