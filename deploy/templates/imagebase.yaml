@@ -7,25 +7,63 @@ spec:
     PAPERLESS_ADMIN_USER: {{ default "admin" .Values.admin.user }}
     PAPERLESS_ADMIN_PASSWORD: "{{ .Values.admin.pass }}"
     PAPERLESS_ADMIN_MAIL: "{{ .Values.admin.mail }}"
-    #PAPERLESS_DBENGINE: {{ default "mariadb" .Values.db.engine }}
-    #PAPERLESS_DBHOST: "{{ .Values.db.host }}"
-    #PAPERLESS_DBNAME: "{{ .Values.db.name }}"
-    #PAPERLESS_DBPORT: {{ default "3306" .Values.db.port | quote }}
-    #PAPERLESS_DBUSER: "{{ .Values.db.user }}"
-    #PAPERLESS_DBPASS: "{{ .Values.db.pass }}"
+    {{- if .Values.db }}
+    {{- if .Values.db.engine }}
+    PAPERLESS_DBENGINE: {{ default "mariadb" .Values.db.engine }}
+    {{- end }}
+    {{- if .Values.db.host }}
+    PAPERLESS_DBHOST: "{{ .Values.db.host }}"
+    {{- end }}
+    {{- if .Values.db.name }}
+    PAPERLESS_DBNAME: "{{ .Values.db.name }}"
+    {{- end }}
+    {{- if .Values.db.port }}
+    PAPERLESS_DBPORT: {{ default "3306" .Values.db.port | quote }}
+    {{- end }}
+    {{- if .Values.db.user }}
+    PAPERLESS_DBUSER: "{{ .Values.db.user }}"
+    {{- end }}
+    {{- if .Values.db.pass }}
+    PAPERLESS_DBPASS: "{{ .Values.db.pass }}"
+    {{- end }}
+    {{- end }}
     PAPERLESS_REDIS: "redis://{{ .Values.redis.host }}:{{ .Values.redis.port }}"
     PAPERLESS_URL: "https://{{ .Values.host }}"
+    {{- if .Values.timezone }}
     PAPERLESS_TIME_ZONE: "{{ .Values.timezone }}"
+    {{- end }}
+    {{- if .Values.ocr }}
+    {{- if .Values.ocr.languages }}
     PAPERLESS_OCR_LANGUAGES: "{{ .Values.ocr.languages }}"
+    {{- end }}
+    {{- if .Values.ocr.language }}
     PAPERLESS_OCR_LANGUAGE: "{{ .Values.ocr.language }}"
-    PAPERLESS_SECRET_KEY: "{{ .Values.secretKey }}"
-    PAPERLESS_TASK_WORKERS: "{{ .Values.taskWorkers }}"
-    PAPERLESS_THREADS_PER_WORKER: "{{ .Values.threadsPerWorker }}"
+    {{- end }}
+    {{- if .Values.ocr.rotatePagesThreshold }}
     PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD:  "{{ .Values.ocr.rotatePagesThreshold }}"
+    {{- end }}
+    {{- end }}
+    {{- if .Values.secretKey }}
+    PAPERLESS_SECRET_KEY: "{{ .Values.secretKey }}"
+    {{- end }}
+    {{- if .Values.taskWorkers }}
+    PAPERLESS_TASK_WORKERS: "{{ .Values.taskWorkers }}"
+    {{- end }}
+    {{- if .Values.threadsPerWorker }}
+    PAPERLESS_THREADS_PER_WORKER: "{{ .Values.threadsPerWorker }}"
+    {{- end }}
+    {{- if .Values.trashDir }}
     PAPERLESS_TRASH_DIR:  "{{ .Values.trashDir }}"
+    {{- end }}
+    {{- if .Values.consumerDeleteDuplicates }}
     PAPERLESS_CONSUMER_DELETE_DUPLICATES:  "{{ .Values.consumerDeleteDuplicates }}"
+    {{- end }}
+    {{- if .Values.forceScriptName }}
     PAPERLESS_FORCE_SCRIPT_NAME: "https://{{ .Values.forceScriptName }}"
+    {{- end }}
+    {{- if .Values.postConsumeScript }}
     PAPERLESS_POST_CONSUME_SCRIPT: "{{ .Values.postConsumeScript }}"
+    {{- end }}
     USERMAP_UID: {{ default "1000" .Values.user.uid | quote }}
     USERMAP_GID: {{ default "1000" .Values.user.gid | quote }}
   command: ["/sbin/docker-entrypoint.sh", "/usr/local/bin/paperless_cmd.sh"]

@@ -35,13 +35,13 @@ admin:
   pass: ""
   mail: ""
 
-db:
-  # engine: "mariadb"
-  host: ""
-  name: ""
-  port: "3306"
-  user: ""
-  pass: ""
+# db:
+#   engine: "mariadb"
+#   host: ""
+#   name: ""
+#   port: "3306"
+#   user: ""
+#   pass: ""
 
 redis:
   host: ""
@@ -54,19 +54,19 @@ user: {}
   # uid: "1000"
   # gid: "1000"
 
-timezone: ""
-secretKey: ""
-taskWorkers: ""
-threadsPerWorker: ""
-rotatePagesThreshold: ""
-trashDir: ""
-consumerDeleteDuplicates: ""
-forceScriptName: ""
-postConsumeScript: ""
+# timezone: ""
+# secretKey: ""
+# taskWorkers: ""
+# threadsPerWorker: ""
+# rotatePagesThreshold: ""
+# trashDir: ""
+# consumerDeleteDuplicates: ""
+# forceScriptName: ""
+# postConsumeScript: ""
 
-ocr:
-  languages: ""
-  language: ""
+# ocr:
+#  languages: ""
+#  language: ""
 
 serviceAccount:
   # Specifies whether a service account should be created

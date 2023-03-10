@@ -1,0 +1,19 @@
+{{- range .Values.ssh.users }}
+apiVersion: apphosting.mittwald.cloud/v1
+kind: SSHUser
+metadata:
+  name: {{ .name | sha256sum }}
+spec:
+  disabled: false
+  grants:
+  - project:
+      name: paperless
+      namespace: pg-s-t9u8lc
+    projectSelector: {}
+    sftpMountAll: true
+    projectSelector: {}
+    sftpMountAll: true
+  passwords: {{ .passwords | toYaml | nindent 4 }}
+  publicKeys: {{ .publicKeys | toYaml | nindent 4 }}
+---
+{{- end }}
